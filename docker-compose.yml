@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  odoo:
+    image: odoo:latest
+    container_name: odoo-app
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"
+    volumes:
+      - ./odoo.conf:/etc/odoo/odoo.conf
+      - ./addons:/mnt
+      - ./data/odoo:/var/lib/odoo
+      - ./entrypoint.sh:/entrypoint.sh
+    env_file: .env
+    entrypoint: ["/entrypoint.sh"]
+    stdin_open: true
+    tty: true
+  db:
+    image: postgres:15
+    container_name: odoo-db
+    restart: always
+    env_file: .env
+    environment:
+      POSTGRES_DB: ${PG_DB}
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+  pgadmin:
+        image: dpage/pgadmin4
+        environment: 
+          - PGADMIN_DEFAULT_EMAIL=admin@gmail.com
+          - PGADMIN_DEFAULT_PASSWORD=admin
+        ports: 
+          - "5019:80"
+        container_name: pgadmin-db
+        volumes:
+          - ./data/pgadmin:/var/lib/pgadmin
