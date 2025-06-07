@@ -1,5 +1,10 @@
-/data/db/*
-/data/odoo/*
-/data/pgadmin/*
-/addons/custom/*
-/addons/enterprise/*
+#make folder data still in repo
+data/db/*
+data/odoo/*
+data/pgadmin/*
+!data/.gitkeep
+
+#make folder addons still in repo
+addons/custom/*
+addons/enterprise/*
+!data/.gitkeep
