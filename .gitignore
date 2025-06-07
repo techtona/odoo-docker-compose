@@ -8,3 +8,4 @@ data/pgadmin/*
 addons/custom/*
 addons/enterprise/*
 !data/.gitkeep
+.env
