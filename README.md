@@ -14,7 +14,7 @@ Repositori ini menyediakan environment siap pakai untuk menjalankan **Odoo 18** 
 ---
 
 ## 🗂 Struktur Direktori
-
+```code
 ├── docker-compose.yml
 ├── .env
 ├── odoo.conf
@@ -22,19 +22,20 @@ Repositori ini menyediakan environment siap pakai untuk menjalankan **Odoo 18** 
 ├── addons/
 │ ├── custom/ ← Custom addons
 │ └── enterprise/ ← Odoo Enterprise (opsional)
-├── data/
-│ ├── db/ ← Volume data PostgreSQL
-│ ├── odoo/ ← Volume data Odoo
-│ └── pgadmin/ ← Volume data PgAdmin
-└── logs/ ← (Opsional) log file Odoo
+└── data/
+  ├── db/ ← Volume data PostgreSQL
+  ├── odoo/ ← Volume data Odoo
+  └── pgadmin/ ← Volume data PgAdmin
+
+```
 
 ## ⚙️ Cara Menjalankan
 
 ### 1. Clone Repositori
 
 ```bash
-git clone https://github.com/techtona/odoo-2025.git
-cd odoo-2025
+git clone https://github.com/techtona/odoo-docker-compose.git
+cd odoo-docker-compose
 ```
 
 ### 2. Buat file .env
@@ -93,6 +94,8 @@ Lalu atur addons_path di odoo.conf:
 ```ini
 addons_path = /mnt/custom,/mnt/enterprise
 ```
+
+dengan menambah file di addons/custom kamu bisa melakukan custom module yang ada di core odoo atau odoo enterprise
 
 ### 🧹 Membersihkan (Reset Total)
 Untuk menghentikan dan menghapus semua container serta volume:
