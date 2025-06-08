@@ -28,6 +28,8 @@ services:
       POSTGRES_PASSWORD: ${PG_PASSWORD}
     volumes:
       - ./data/db:/var/lib/postgresql/data
+      - ./postgresql.conf:/etc/postgresql/postgresql.conf
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
   pgadmin:
         image: dpage/pgadmin4
         env_file: .env
