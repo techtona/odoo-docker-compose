@@ -1,9 +1,7 @@
-version: '3.8'
-
 services:
   odoo:
-    image: odoo:latest
-    container_name: odoo-app
+    image: odoo:18
+    container_name: odoo18-app
     depends_on:
       - db
     ports:
@@ -19,25 +17,27 @@ services:
     tty: true
   db:
     image: postgres:15
-    container_name: odoo-db
+    container_name: odoo18-db
     restart: always
     env_file: .env
     environment:
       POSTGRES_DB: ${PG_DB}
       POSTGRES_USER: ${PG_USER}
       POSTGRES_PASSWORD: ${PG_PASSWORD}
+    ports: 
+      - "5432:5432"
     volumes:
       - ./data/db:/var/lib/postgresql/data
       - ./postgresql.conf:/etc/postgresql/postgresql.conf
     command: postgres -c config_file=/etc/postgresql/postgresql.conf
   pgadmin:
         image: dpage/pgadmin4
+        container_name: pgadmin18-db
         env_file: .env
         environment: 
           - PGADMIN_DEFAULT_EMAIL=${PGA_EMAIL}
           - PGADMIN_DEFAULT_PASSWORD=${PGA_PASSWORD}
         ports: 
           - "5019:80"
-        container_name: pgadmin-db
         volumes:
           - ./data/pgadmin:/var/lib/pgadmin
